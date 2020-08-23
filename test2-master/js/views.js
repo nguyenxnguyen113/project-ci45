@@ -47,16 +47,33 @@ view.setActiveScreen = async(screen, id) => {
             {
                 // in ra man login
                 document.getElementById('app').innerHTML = components.selectRoomScreen
-                document.querySelector('.create-room .btn').addEventListener('click', () => {
+                document.querySelector('.new-room-bnt').addEventListener('click', () => {
                     view.setActiveScreen('createRoomScreen')
                 })
+                const response = await firebase.firestore().collection(model.collectionName).get()
+                model.rooms = getDataFromDocs(response.docs)
+                const searchBar = document.getElementById('myInput')
+                searchBar.addEventListener('keyup', (e) => {
+                    const searchString = e.target.value.toLowerCase();
+
+                    const filteredCharacters = model.rooms.filter((character) => {
+                        return (
+                            character.title.toLowerCase().includes(searchString)
+                        );
+                    });
+                    for (let index = 0; index < filteredCharacters.length; index++) {
+                        console.log(filteredCharacters[index])
+                    }
+                });
                 break;
+
             }
         case 'createRoomScreen':
             {
                 document.getElementById('app').innerHTML = components.createRoomScreen
                 document.getElementById('back-to-chat').addEventListener('click', () => {
                     view.setActiveScreen('selectRoomScreen')
+                    model.loadRooms()
                 })
 
                 const createRoomForm = document.getElementById('create-conversation-form')
@@ -143,19 +160,20 @@ view.showRooms = () => {
     }
 }
 
-view.addNewRoom = (room, data) => {
-    const roomTable = document.createElement('tr')
-    roomTable.id = room.id
-    roomTable.innerHTML = `
-    <td>${room.id}</td>
-    <td>${room.host}</td>
-    <td>${room.name}</td>
-    <td>${room.title}</td>
-    <td>${room.createdAt}</td>
+view.addNewRoom = (room) => {
+    const roomWrapper = document.createElement('div')
+    roomWrapper.className = 'room-bar'
+    roomWrapper.id = room.id
+    roomWrapper.innerHTML = `
+    <div class="room-id">ID: ${room.id}</div>
+    <div class="room-host">Host: ${room.host}</div>
+    
+    <div class="room-title">Title: ${room.title}</div>
+    <div class="room-createAt">Created At: ${room.createdAt}</div>
 `
-    document.querySelector(".tr").appendChild(roomTable)
+    document.querySelector(".room-list").appendChild(roomWrapper)
 
-    let joinRoom = document.getElementById(roomTable.id)
+    let joinRoom = document.getElementById(roomWrapper.id)
     joinRoom.addEventListener('click', async() => {
         model.currentRoomID = room.id
         view.setActiveScreen('classRoomScreen', room.id)
@@ -168,4 +186,21 @@ view.addMessage = (senderId, text) => {
         <div class="RTM-message">${senderId}: ${text}</div>
     `
     messageContainer.insertAdjacentHTML('beforeend', html)
+}
+view.getRooms = (data) => {
+    let listRooms = document.querySelector('.room-list')
+    let html = `
+<div class="room-bar" id="${data.id}">
+    <div class="room-id">ID: ${data.id}</div>
+    <div class="room-host">Host: ${data.host}</div>
+    <div class="room-title">Title: ${data.title}</div>
+    <div class="room-createAt">Created At: ${data.createdAt}</div>
+</div>
+    `
+    listRooms.innerHTML = html;
+    let joinRoom = document.getElementById(data.id)
+    joinRoom.addEventListener('click', async() => {
+        model.currentRoomID = data.id
+        view.setActiveScreen('classRoomScreen', data.id)
+    })
 }

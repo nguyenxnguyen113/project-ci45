@@ -26,12 +26,12 @@ model.getUserIntoRoom = async(idstream, currentRoomID) => {
 }
 model.createRoom = (room) => {
     firebase.firestore().collection(model.collectionName).add(room)
-    view.setActiveScreen('SelectRoomScreen', true)
+
 }
 model.loadRooms = async() => {
     const response = await firebase.firestore().collection(model.collectionName).get()
     model.rooms = getDataFromDocs(response.docs)
-    view.setActiveScreen('selectRoomScreen', true)
+
     view.showRooms()
 }
 
@@ -73,4 +73,8 @@ model.addUserToRoom = (id, currentRoomID) => {
 
 model.removeUserInRoom = (id, currentRoomID) => {
     firebase.database().ref(`${currentRoomID}/` + id).remove();
+}
+model.getDoc = async() => {
+    const snapshot = await firebase.firestore().collection(model.collectionName).get()
+    return snapshot.docs.map(doc => doc.data().host);
 }
