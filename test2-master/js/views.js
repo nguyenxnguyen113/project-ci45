@@ -58,7 +58,7 @@ view.setActiveScreen = async(screen, id) => {
                         view.setActiveScreen('loginScreen')
                     })
                 })
-                console.log(model.currentUser.email)
+
                 const response = await firebase.firestore().collection(model.collectionName).get()
                 roomSearch = getDataFromDocs(response.docs)
                 const searchBar = document.getElementById('myInput')
@@ -105,6 +105,7 @@ view.setActiveScreen = async(screen, id) => {
                         }
                         model.loadRooms()
                         model.createRoom(data)
+                        view.setActiveScreen('selectRoomScreen')
                     }).catch(function(err) {
                         console.error(err);
                     });
@@ -180,7 +181,7 @@ view.addNewRoom = (room) => {
     <div class="room-title">Title: ${room.title}</div>
     <div class="room-createAt">Created At: ${room.createdAt}</div>
 `
-    document.querySelector(".room-list").appendChild(roomWrapper)
+    document.querySelector(".right-container .room-list").appendChild(roomWrapper)
 
     let joinRoom = document.getElementById(roomWrapper.id)
     joinRoom.addEventListener('click', async() => {
