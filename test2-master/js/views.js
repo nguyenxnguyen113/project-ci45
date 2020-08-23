@@ -62,7 +62,7 @@ view.setActiveScreen = async(screen, id) => {
                         );
                     });
                     for (let index = 0; index < filteredCharacters.length; index++) {
-                        console.log(filteredCharacters[index])
+                        view.getRooms(filteredCharacters[index])
                     }
                 });
                 break;
