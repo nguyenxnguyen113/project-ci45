@@ -30,6 +30,7 @@ let init = () => {
     });
 }
 
+
 window.onload = init
 getDataFromDoc = (doc) => {
     const data = doc.data()

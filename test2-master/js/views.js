@@ -58,6 +58,7 @@ view.setActiveScreen = async(screen, id) => {
                         view.setActiveScreen('loginScreen')
                     })
                 })
+                console.log(model.currentUser.email)
                 const response = await firebase.firestore().collection(model.collectionName).get()
                 roomSearch = getDataFromDocs(response.docs)
                 const searchBar = document.getElementById('myInput')
