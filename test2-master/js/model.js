@@ -76,5 +76,5 @@ model.removeUserInRoom = (id, currentRoomID) => {
 }
 model.getDoc = async() => {
     const snapshot = await firebase.firestore().collection(model.collectionName).get()
-    return snapshot.docs.map(doc => doc.data().host);
+    return snapshot.docs.map(doc => doc.data());
 }

@@ -50,18 +50,26 @@ view.setActiveScreen = async(screen, id) => {
                 document.querySelector('.new-room-bnt').addEventListener('click', () => {
                     view.setActiveScreen('createRoomScreen')
                 })
+                const logOut = document.querySelector('.log-out-bnt')
+                logOut.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    firebase.auth().signOut().then(() => {
+                        console.log('user signed out')
+                        view.setActiveScreen('loginScreen')
+                    })
+                })
                 const response = await firebase.firestore().collection(model.collectionName).get()
-                model.rooms = getDataFromDocs(response.docs)
+                roomSearch = getDataFromDocs(response.docs)
                 const searchBar = document.getElementById('myInput')
                 searchBar.addEventListener('keyup', (e) => {
                     const searchString = e.target.value.toLowerCase();
 
-                    const filteredCharacters = model.rooms.filter((character) => {
+                    const filteredCharacters = roomSearch.filter((character) => {
                         return (
                             character.title.toLowerCase().includes(searchString)
                         );
                     });
-                    for (let index = 0; index < filteredCharacters.length; index++) {
+                    for (let index = 0; index < roomSearch.length; index++) {
                         view.getRooms(filteredCharacters[index])
                     }
                 });
@@ -175,8 +183,13 @@ view.addNewRoom = (room) => {
 
     let joinRoom = document.getElementById(roomWrapper.id)
     joinRoom.addEventListener('click', async() => {
-        model.currentRoomID = room.id
-        view.setActiveScreen('classRoomScreen', room.id)
+        var person = prompt("Please enter password");
+        if (person === room.password) {
+            model.currentRoomID = room.id
+            view.setActiveScreen('classRoomScreen', room.id)
+        } else {
+            alert('Join failed')
+        }
     })
 }
 
@@ -200,7 +213,13 @@ view.getRooms = (data) => {
     listRooms.innerHTML = html;
     let joinRoom = document.getElementById(data.id)
     joinRoom.addEventListener('click', async() => {
-        model.currentRoomID = data.id
-        view.setActiveScreen('classRoomScreen', data.id)
+        var person = prompt("Please enter your name", "Harry Potter");
+        if (person === data.password) {
+            model.currentRoomID = data.id
+            view.setActiveScreen('classRoomScreen', data.id)
+        } else {
+            alert('Join failed')
+        }
+
     })
 }
