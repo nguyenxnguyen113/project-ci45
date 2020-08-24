@@ -61,10 +61,11 @@ view.setActiveScreen = async(screen, id) => {
 
                 const response = await firebase.firestore().collection(model.collectionName).get()
                 roomSearch = getDataFromDocs(response.docs)
+
                 const searchBar = document.getElementById('myInput')
                 searchBar.addEventListener('keyup', (e) => {
                     const searchString = e.target.value.toLowerCase();
-
+                    document.querySelector('.room-list').innerText = ''
                     const filteredCharacters = roomSearch.filter((character) => {
                         return (
                             character.title.toLowerCase().includes(searchString)
@@ -216,7 +217,7 @@ view.getRooms = (data) => {
     <div class="room-createAt">Created At: ${data.createdAt}</div>
 </div>
     `
-    listRooms.innerHTML = html;
+    listRooms.insertAdjacentHTML('beforeend', html)
     let joinRoom = document.getElementById(data.id)
     joinRoom.addEventListener('click', async() => {
         var person = prompt("Please enter your name", "Harry Potter");
@@ -231,7 +232,6 @@ view.getRooms = (data) => {
         let r = await model.getRoomInfo(data.id)
         view.getInFoRoom(r)
     })
-
 }
 view.updateNumberUser = (docId, numberUser) => {
     const conversation = document.getElementById(docId)
