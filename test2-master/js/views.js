@@ -230,3 +230,53 @@ view.updateNumberUser = (docId, numberUser) => {
     const secondChild = conversation.getElementsByTagName('div')[1]
     secondChild.innerText = numberUser + ' members'
 }
+view.getRoom = (room) => {
+    let infoRoom = document.querySelector('.left-container')
+    let html = `
+    <div class="class-name">${room.name} </div>
+    <div class="teacher-info">
+        <label>Teacher:</label>
+        <div class="info">
+            <img src="./img/husky.png" alt="">
+            <div>${room.host}</div>
+        </div>
+    </div>
+    <div class="students">
+        <label>Students:</label>
+        <div class="student-info">
+            <div class="info">
+                <img src="./img/chiba.jfif" alt="">
+                <div>Bui Van Hiu</div>
+            </div>
+            <div class="info">
+                <img src="./img/dog2.jfif" alt="">
+                <div>Bui Van Hiu</div>
+            </div>
+            <div class="info">
+                <img src="./img/husky.png" alt="">
+                <div>Bui Van Hiu</div>
+            </div>
+            <div class="info">
+                <img src="./img/chiba.jfif" alt="">
+                <div>Bui Van Hiu</div>
+            </div>
+            <div class="info">
+                <img src="./img/chiba.jfif" alt="">
+                <div>Bui Van Hiu</div>
+            </div>
+            <div class="info">
+                <img src="./img/chiba.jfif" alt="">
+                <div>Bui Van Hiu</div>
+            </div>
+        </div>
+    </div>
+    <div class="title">
+        <label for="">Title:</label>
+        <p>
+            ${room.title}
+        </p>
+    </div>
+
+    `
+    infoRoom.innerHTML = html;
+}
