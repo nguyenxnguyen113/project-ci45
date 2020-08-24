@@ -193,8 +193,9 @@ view.addNewRoom = (room) => {
             alert('Join failed')
         }
     })
-    joinRoom.addEventListener('mouseover', () => {
-        view.getInFoRoom(model.room)
+    joinRoom.addEventListener('mouseover', async() => {
+        let r = await model.getRoomInfo(room.id)
+        view.getInFoRoom(r)
     })
 }
 
