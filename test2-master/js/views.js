@@ -193,6 +193,9 @@ view.addNewRoom = (room) => {
             alert('Join failed')
         }
     })
+    joinRoom.addEventListener('mouseover', () => {
+        model.getRoomInfo(room.id)
+    })
 }
 
 view.addMessage = (senderId, text) => {
@@ -222,8 +225,8 @@ view.getRooms = (data) => {
         } else {
             alert('Join failed')
         }
-
     })
+
 }
 view.updateNumberUser = (docId, numberUser) => {
     const conversation = document.getElementById(docId)

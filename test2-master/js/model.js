@@ -18,15 +18,14 @@ model.initFirebaseStore = () => {
 }
 model.getRoomInfo = async(id) => {
     let data = await model.initFirebaseStore().collection(model.collectionName).doc(`${id}`).get()
-    return data.data()
+    console.log(data.data())
 }
 model.getUserIntoRoom = async(idstream, currentRoomID) => {
     let data = await firebase.database().ref(`${currentRoomID}/` + idstream).once('value')
     return data.val()
 }
-model.createRoom = (room) => {
-    firebase.firestore().collection(model.collectionName).add(room)
-
+model.createRoom = async(room) => {
+    await firebase.firestore().collection(model.collectionName).add(room)
 }
 model.loadRooms = async() => {
     const response = await firebase.firestore().collection(model.collectionName).get()
