@@ -227,6 +227,10 @@ view.getRooms = (data) => {
             alert('Join failed')
         }
     })
+    joinRoom.addEventListener('mouseover', async() => {
+        let r = await model.getRoomInfo(data.id)
+        view.getInFoRoom(r)
+    })
 
 }
 view.updateNumberUser = (docId, numberUser) => {
