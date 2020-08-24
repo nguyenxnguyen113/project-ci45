@@ -4,6 +4,7 @@ model.classRoomID = []
 model.collectionName = 'rooms'
 model.rooms = undefined
 model.currentUser = undefined
+model.room = undefined
 model.login = async(email, password) => {
     try {
         const response = await firebase
@@ -18,7 +19,8 @@ model.initFirebaseStore = () => {
 }
 model.getRoomInfo = async(id) => {
     let data = await model.initFirebaseStore().collection(model.collectionName).doc(`${id}`).get()
-    console.log(data.data().host)
+    model.room = data.data()
+    console.log(model.room)
 }
 model.getUserIntoRoom = async(idstream, currentRoomID) => {
     let data = await firebase.database().ref(`${currentRoomID}/` + idstream).once('value')

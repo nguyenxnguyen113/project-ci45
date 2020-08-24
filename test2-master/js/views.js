@@ -194,7 +194,7 @@ view.addNewRoom = (room) => {
         }
     })
     joinRoom.addEventListener('mouseover', () => {
-        view.getInFoRoom(model.getRoomInfo(room.id))
+        view.getInFoRoom(model.room)
     })
 }
 
