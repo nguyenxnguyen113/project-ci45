@@ -18,7 +18,7 @@ model.initFirebaseStore = () => {
 }
 model.getRoomInfo = async(id) => {
     let data = await model.initFirebaseStore().collection(model.collectionName).doc(`${id}`).get()
-    console.log(data.data())
+    console.log(data.data().host)
 }
 model.getUserIntoRoom = async(idstream, currentRoomID) => {
     let data = await firebase.database().ref(`${currentRoomID}/` + idstream).once('value')

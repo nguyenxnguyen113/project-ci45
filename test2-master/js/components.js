@@ -49,49 +49,7 @@ components.selectRoomScreen = `
 </div>
 <div class="main-container">
     <div class="left-container">
-        <div class="class-name">Lop Tieng Anh </div>
-        <div class="teacher-info">
-            <label>Teacher:</label>
-            <div class="info">
-                <img src="./img/husky.png" alt="">
-                <div>Bui Van Hiu</div>
-            </div>
-        </div>
-        <div class="students">
-            <label>Students:</label>
-            <div class="student-info">
-                <div class="info">
-                    <img src="./img/chiba.jfif" alt="">
-                    <div>Bui Van Hiu</div>
-                </div>
-                <div class="info">
-                    <img src="./img/dog2.jfif" alt="">
-                    <div>Bui Van Hiu</div>
-                </div>
-                <div class="info">
-                    <img src="./img/husky.png" alt="">
-                    <div>Bui Van Hiu</div>
-                </div>
-                <div class="info">
-                    <img src="./img/chiba.jfif" alt="">
-                    <div>Bui Van Hiu</div>
-                </div>
-                <div class="info">
-                    <img src="./img/chiba.jfif" alt="">
-                    <div>Bui Van Hiu</div>
-                </div>
-                <div class="info">
-                    <img src="./img/chiba.jfif" alt="">
-                    <div>Bui Van Hiu</div>
-                </div>
-            </div>
-        </div>
-        <div class="title">
-            <label for="">Title:</label>
-            <p>
-                Lop Hoc Tieng Anh Cho Nguoi Moi bat Dau: Free for everyone hello every one alo alo alo alo
-            </p>
-        </div>
+
     </div>
     <div class="right-container">
         <button class="new-room-bnt">Create New Room</button>

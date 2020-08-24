@@ -194,7 +194,7 @@ view.addNewRoom = (room) => {
         }
     })
     joinRoom.addEventListener('mouseover', () => {
-        model.getRoomInfo(room.id)
+        view.getInFoRoom(model.getRoomInfo(room.id))
     })
 }
 
@@ -233,7 +233,7 @@ view.updateNumberUser = (docId, numberUser) => {
     const secondChild = conversation.getElementsByTagName('div')[1]
     secondChild.innerText = numberUser + ' members'
 }
-view.getRoom = (room) => {
+view.getInFoRoom = (room) => {
     let infoRoom = document.querySelector('.left-container')
     let html = `
     <div class="class-name">${room.name} </div>
