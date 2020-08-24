@@ -58,7 +58,7 @@ view.setActiveScreen = async(screen, id) => {
                         view.setActiveScreen('loginScreen')
                     })
                 })
-
+                console.log(model.getUserIntoRoom().email)
                 const response = await firebase.firestore().collection(model.collectionName).get()
                 roomSearch = getDataFromDocs(response.docs)
                 const searchBar = document.getElementById('myInput')
@@ -224,4 +224,9 @@ view.getRooms = (data) => {
         }
 
     })
+}
+view.updateNumberUser = (docId, numberUser) => {
+    const conversation = document.getElementById(docId)
+    const secondChild = conversation.getElementsByTagName('div')[1]
+    secondChild.innerText = numberUser + ' users'
 }
