@@ -272,8 +272,8 @@ components.updateProfileScreen = `
 components.profileBox = `
 <div class="profile-row pd-t-2">
 <div class="info-profile">
-    <div id="profile-name">Name:Đỗ Hải Nam</div>
-    <div id="profile-email">Email:dohainamhn@gmail.com</div>
+    <div id="profile-name"></div>
+    <div id="profile-email"></div>
 </div>
 <div class="info-profile">
     <div id="is-teacher"></div>
@@ -355,4 +355,55 @@ components.editPasswordBox = `
     <button type=submit" class="bnt">Confirm</button>
 </form>
 `
-components.viewYourFriendProfile = ``
+components.viewYourFriendProfile = `
+<div class="container1">
+<div class="nav-bar">
+    <div class="symbol">Online Class</div>
+    <div class="search-bar">
+        <div>
+            <input placeholder="Search..." type="text" name="" id="">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+    <div class="nav-bar-info-User">
+        <div><img src="" alt=""></div>
+        <div class="user-name"></div>
+        <div class="notification">
+            <i class="far fa-envelope"></i>
+        </div>
+        <div class="log-out-bnt">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+    </div>
+</div>
+<div class="main-container1">
+    <div class="upload-img">
+        <div>
+            <img src="https://static.thenounproject.com/png/558475-200.png" alt="">
+            <label for="upload">
+                <i class="fas fa-camera"></i>
+            </label>
+            <input type="file" accept="image/png ,image/jpeg,image/gif" id="upload" class="display-none">
+        </div>
+    </div>
+    <div class="profile-box">
+    <div class="profile-row pd-t-2">
+    <div class="info-profile">
+        <div id="profile-name"></div>
+        <div id="profile-email"></div>
+    </div>
+    <div class="info-profile">
+        <div id="is-teacher"></div>
+        <div id="work-at"></div>
+    </div>
+    </div>
+    <div class="about-me-profile">
+    <label>About Me:</label>
+    <p id="about-me">
+        
+    </p>
+    </div>
+    </div>
+</div>
+</div>
+`
