@@ -261,7 +261,7 @@ view.addNewRoom = (room) => {
     <div class="room-id">ID: ${room.id}</div>
     <div class="room-host">Host: ${room.host}</div>
     
-    <div class="room-title">Title: ${room.name}</div>
+    <div class="room-title">Name: ${room.name}</div>
     <div class="room-createAt">Created At: ${room.createdAt}</div>
 `
     document.querySelector(".right-container .room-list").appendChild(roomWrapper)
@@ -280,6 +280,7 @@ view.addNewRoom = (room) => {
         let r = await model.getRoomInfo(room.id)
         view.getInFoRoom(r)
     })
+
 }
 
 view.addMessage = (senderId, text) => {
@@ -289,6 +290,7 @@ view.addMessage = (senderId, text) => {
     `
     messageContainer.insertAdjacentHTML('beforeend', html)
 }
+
 view.getRooms = (data) => {
     let listRooms = document.querySelector('.room-list')
     let html = `
@@ -328,7 +330,7 @@ view.getInFoRoom = (room) => {
         <label>Teacher:</label>
         <div class="info">
             <img src="./img/husky.png" alt="">
-            <div>${room.host}</div>
+            <div class="email-user">${room.host}</div>
         </div>
     </div>
 
@@ -341,6 +343,11 @@ view.getInFoRoom = (room) => {
 
     `
     infoRoom.innerHTML = html;
+    let getUser = document.querySelector('.email-user')
+    getUser.addEventListener('click', () => {
+        model.getInfoUser(room.host)
+    })
+    console.log(getUser)
 }
 view.setNavbarInfoUser = () => {
     let imgUser = document.querySelector('.nav-bar-info-User img')
@@ -477,4 +484,35 @@ view.listenOnUpdateImage = () => {
         })
 
     })
+}
+
+view.getUser = (user) => {
+    // let infoUser = document.querySelector('.profile-box')
+    // let html = `    
+    // <div class="profile-row pd-t-2">
+    // <div class="info-profile">
+    //     <div id="profile-name">${user.name}</div>
+    //     <div id="profile-email">${user.email}</div>
+    // </div>
+    // <div class="info-profile">
+    //     <div id="is-teacher"></div>
+    //     <div id="work-at">${user.workAt}</div>
+    // </div>
+    // </div>
+    // <div class="about-me-profile">
+    // <label>About Me:</label>
+    // <p id="about-me">
+    //     ${user.aboutMe}
+    // </p>
+    // </div>`
+    // infoUser.innerHTML = html
+    // document.getElementById('profile-name').innerHTML = `Name: ${user.name}`
+    // document.getElementById('profile-email').innerHTML = `Email: ${user.email}`
+    // let isTeacher = document.getElementById('is-teacher');
+    // let workAt = document.getElementById('work-at')
+    // let aboutMe = document.getElementById('about-me')
+    // let data = await model.getDataFireStore('users');
+    // data.isTeacher ? isTeacher.innerHTML = "Job: Teacher" : isTeacher.innerHTML = "Job: Student"
+    // data.workAt == undefined ? workAt.innerHTML = `` : workAt.innerHTML = `Working at:  ${data.workAt}`
+    // data.aboutMe == undefined ? aboutMe.innerHTML = `` : aboutMe.innerHTML = data.aboutMe
 }
