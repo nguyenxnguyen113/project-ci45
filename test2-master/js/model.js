@@ -149,10 +149,8 @@ model.getDataFireStore = async(collection) => {
 }
 model.getInfoUser = async(email) => {
     let db = firebase.firestore()
-    let data = await db.collection(`${collection}`)
-        .where("email", "==", email)
-        .get()
-    console.log(data.data())
+    let data = await db.collection('users').where("email", "==", email).get()
+    return data.docs[0].data()
 }
 model.updateDataToFireStore = async(collection, data) => {;
     let db = firebase.firestore()

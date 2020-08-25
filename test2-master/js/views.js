@@ -238,7 +238,7 @@ view.setActiveScreen = async(screen, id) => {
             }
         case 'viewYourFriendProfile':
             {
-                document.getElementById("app").innerHTML = components.updateProfileScreen;
+                document.getElementById("app").innerHTML = components.viewYourFriendProfile;
             }
     }
 }
@@ -344,10 +344,12 @@ view.getInFoRoom = (room) => {
     `
     infoRoom.innerHTML = html;
     let getUser = document.querySelector('.email-user')
-    getUser.addEventListener('click', () => {
-        model.getInfoUser(room.host)
+    getUser.addEventListener('click', async() => {
+        let userDetail = await model.getInfoUser(room.host)
+        view.setActiveScreen('viewYourFriendProfile')
+        view.getUser(userDetail)
+
     })
-    console.log(getUser)
 }
 view.setNavbarInfoUser = () => {
     let imgUser = document.querySelector('.nav-bar-info-User img')
@@ -487,25 +489,26 @@ view.listenOnUpdateImage = () => {
 }
 
 view.getUser = (user) => {
-    // let infoUser = document.querySelector('.profile-box')
-    // let html = `    
-    // <div class="profile-row pd-t-2">
-    // <div class="info-profile">
-    //     <div id="profile-name">${user.name}</div>
-    //     <div id="profile-email">${user.email}</div>
-    // </div>
-    // <div class="info-profile">
-    //     <div id="is-teacher"></div>
-    //     <div id="work-at">${user.workAt}</div>
-    // </div>
-    // </div>
-    // <div class="about-me-profile">
-    // <label>About Me:</label>
-    // <p id="about-me">
-    //     ${user.aboutMe}
-    // </p>
-    // </div>`
-    // infoUser.innerHTML = html
+    let infoUser = document.querySelector('.profile-box')
+    let html = `    
+    <div class="profile-row pd-t-2">
+    <div class="info-profile">
+        <div id="profile-name">Name: ${user.name}</div>
+        <div id="profile-email">Email ${user.email}</div>
+    </div>
+    <div class="info-profile">
+        <div id="is-teacher"></div>
+        <div id="work-at">Work: ${user.workAt}</div>
+    </div>
+    </div>
+    <div class="about-me-profile">
+    <label>About Me:</label>
+    <p id="about-me">
+        ${user.aboutMe}
+    </p>
+    </div>`
+    infoUser.innerHTML = html
+
     // document.getElementById('profile-name').innerHTML = `Name: ${user.name}`
     // document.getElementById('profile-email').innerHTML = `Email: ${user.email}`
     // let isTeacher = document.getElementById('is-teacher');
