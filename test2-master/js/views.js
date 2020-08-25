@@ -322,35 +322,7 @@ view.getInFoRoom = (room) => {
             <div>${room.host}</div>
         </div>
     </div>
-    <div class="students">
-        <label>Students:</label>
-        <div class="student-info">
-            <div class="info">
-                <img src="./img/chiba.jfif" alt="">
-                <div>Bui Van Hiu</div>
-            </div>
-            <div class="info">
-                <img src="./img/dog2.jfif" alt="">
-                <div>Bui Van Hiu</div>
-            </div>
-            <div class="info">
-                <img src="./img/husky.png" alt="">
-                <div>Bui Van Hiu</div>
-            </div>
-            <div class="info">
-                <img src="./img/chiba.jfif" alt="">
-                <div>Bui Van Hiu</div>
-            </div>
-            <div class="info">
-                <img src="./img/chiba.jfif" alt="">
-                <div>Bui Van Hiu</div>
-            </div>
-            <div class="info">
-                <img src="./img/chiba.jfif" alt="">
-                <div>Bui Van Hiu</div>
-            </div>
-        </div>
-    </div>
+
     <div class="title">
         <label for="">Title:</label>
         <p>

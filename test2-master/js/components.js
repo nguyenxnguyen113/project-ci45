@@ -222,7 +222,7 @@ components.createRoomScreen = `
 </div>
 </div>`
 components.updateProfileScreen = `
-<div class="container">
+<div class="container1">
 <div class="nav-bar">
     <a href="">
         <div class="symbol">Online Class</div>
@@ -244,7 +244,7 @@ components.updateProfileScreen = `
         </div>
     </div>
 </div>
-<div class="main-container">
+<div class="main-container1">
     <div class="upload-img">
         <div>
             <img src="https://static.thenounproject.com/png/558475-200.png" alt="">
