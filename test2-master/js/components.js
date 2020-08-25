@@ -224,9 +224,7 @@ components.createRoomScreen = `
 components.updateProfileScreen = `
 <div class="container1">
 <div class="nav-bar">
-    <a href="">
-        <div class="symbol">Online Class</div>
-    </a>
+    <div class="symbol">Online Class</div>
     <div class="search-bar">
         <div>
             <input placeholder="Search..." type="text" name="" id="">
@@ -261,6 +259,7 @@ components.updateProfileScreen = `
                 <button id="profile-bnt" class="active-bnt">Profile</button>
                 <button id="edit-profile-bnt" >Edit profile</button>
                 <button id="edit-password-bnt">Edit password</button>
+                <button id="view-room-of-current-user">View your room</button>
             </div>
         </div>
     </div>
@@ -356,3 +355,4 @@ components.editPasswordBox = `
     <button type=submit" class="bnt">Confirm</button>
 </form>
 `
+components.viewYourFriendProfile = ``

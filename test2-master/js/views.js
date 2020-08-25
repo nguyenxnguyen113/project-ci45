@@ -126,7 +126,7 @@ view.setActiveScreen = async(screen, id) => {
                     document.querySelector('.room-list').innerText = ''
                     const filteredCharacters = roomSearch.filter((character) => {
                         return (
-                            character.title.toLowerCase().includes(searchString)
+                            character.name.toLowerCase().includes(searchString)
                         );
                     });
                     for (let index = 0; index < roomSearch.length; index++) {
@@ -229,7 +229,16 @@ view.setActiveScreen = async(screen, id) => {
                 view.setNavbarInfoUser()
                 view.setUpProfilePage()
                 view.listenOnUpdateImage()
+                const homPage = document.querySelector('.symbol')
+                homPage.addEventListener('click', () => {
+                    view.setActiveScreen('select')
+                })
+                console.log(homPage)
                 break;
+            }
+        case 'viewYourFriendProfile':
+            {
+                document.getElementById("app").innerHTML = components.updateProfileScreen;
             }
     }
 }
@@ -252,7 +261,7 @@ view.addNewRoom = (room) => {
     <div class="room-id">ID: ${room.id}</div>
     <div class="room-host">Host: ${room.host}</div>
     
-    <div class="room-title">Title: ${room.title}</div>
+    <div class="room-title">Title: ${room.name}</div>
     <div class="room-createAt">Created At: ${room.createdAt}</div>
 `
     document.querySelector(".right-container .room-list").appendChild(roomWrapper)
@@ -286,7 +295,7 @@ view.getRooms = (data) => {
 <div class="room-bar" id="${data.id}">
     <div class="room-id">ID: ${data.id}</div>
     <div class="room-host">Host: ${data.host}</div>
-    <div class="room-title">Title: ${data.title}</div>
+    <div class="room-title">Name: ${data.name}</div>
     <div class="room-createAt">Created At: ${data.createdAt}</div>
 </div>
     `
