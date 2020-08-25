@@ -103,6 +103,11 @@ view.setActiveScreen = async(screen, id) => {
                 document.querySelector('.new-room-bnt').addEventListener('click', () => {
                     view.setActiveScreen('createRoomScreen')
                 })
+                let userName = document.querySelector('.nav-bar-info-User .user-name')
+                userName.addEventListener('click', () => {
+                    view.setActiveScreen('updatePageScreen')
+                })
+                view.setNavbarInfoUser()
                 const logOut = document.querySelector('.log-out-bnt')
                 logOut.addEventListener('click', (e) => {
                     e.preventDefault()
@@ -165,6 +170,7 @@ view.setActiveScreen = async(screen, id) => {
                         console.error(err);
                     });
                 })
+
                 break;
             }
         case 'classRoomScreen':
@@ -211,6 +217,19 @@ view.setActiveScreen = async(screen, id) => {
                     view.setActiveScreen('selectRoomScreen')
                 })
                 view.count++
+                break;
+            }
+        case 'updatePageScreen':
+            {
+                document.getElementById("app").innerHTML = components.updateProfileScreen;
+                document.querySelector('.log-out-bnt').addEventListener('click', () => {
+                    firebase.auth().signOut()
+                })
+                console.log('hello ae');
+                view.setNavbarInfoUser()
+                view.setUpProfilePage()
+                view.listenOnUpdateImage()
+                break;
             }
     }
 }
@@ -341,4 +360,11 @@ view.getInFoRoom = (room) => {
 
     `
     infoRoom.innerHTML = html;
+}
+view.setNavbarInfoUser = () => {
+    let imgUser = document.querySelector('.nav-bar-info-User img')
+    let userName = document.querySelector('.nav-bar-info-User .user-name')
+        // let img = document.querySelector('.upload-img img').src = firebase.auth().currentUser.photoURL
+    userName.innerHTML = `${firebase.auth().currentUser.displayName}`
+    imgUser.src = `${firebase.auth().currentUser.photoURL}`
 }

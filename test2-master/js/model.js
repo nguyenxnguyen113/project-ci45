@@ -108,3 +108,49 @@ model.getDoc = async() => {
     const snapshot = await firebase.firestore().collection(model.collectionName).get()
     return snapshot.docs.map(doc => doc.data());
 }
+
+model.addFireStore = (collection, data) => {
+    var db = firebase.firestore();
+    db.collection(collection).add(data)
+        .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+            model.key = docRef.id
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+}
+model.resetPassword = (data) => {
+    var user = firebase.auth().currentUser;
+    var credentials = firebase.auth.EmailAuthProvider.credential(
+        user.email,
+        data.currentPassword.value
+    );
+    user.reauthenticateWithCredential(credentials).then(function() {
+        user.updatePassword(data.password.value).then(function() {
+            model.updateDataToFireStore('users', { password: data.password.value })
+            alert('update successfully');
+            firebase.auth().signOut()
+        }).catch(function(error) {
+            controller.authenticate(error)
+            console.log(error);
+        });
+    }).catch(function(error) {
+        console.log(error);
+    });
+
+}
+model.getDataFireStore = async(collection) => {
+    let db = firebase.firestore()
+    let data = await db.collection(`${collection}`)
+        .where("email", "==", firebase.auth().currentUser.email)
+        .get()
+    return data.docs[0].data()
+}
+model.updateDataToFireStore = async(collection, data) => {;
+    let db = firebase.firestore()
+    let doc = await db.collection(`${collection}`)
+        .where("email", "==", firebase.auth().currentUser.email)
+        .get()
+    db.collection(`${collection}`).doc(`${doc.docs[0].id}`).update(data)
+}
