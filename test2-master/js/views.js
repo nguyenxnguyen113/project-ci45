@@ -17,30 +17,83 @@ let view = {}
 view.count = 0;
 view.setActiveScreen = async(screen, id) => {
     switch (screen) {
-        case 'loginScreen':
+        case "registerScreen":
             {
-                document.getElementById("app").innerHTML = components.loginScreen;
-                const loginForm = document.getElementById("login-form");
-                loginForm.addEventListener("submit", (event) => {
-                    event.preventDefault();
+                let screen = document.getElementById('app')
+                screen.innerHTML = components.registerScreen
+                let register = document.getElementById('register-form')
+                let gotoLogin = document.getElementById('go-to-login')
+                register.addEventListener('submit', (x) => {
+                    x.preventDefault()
+                    let check = null;
+                    register.isTeacher.checked == register.isStudent.checked ? check = "" : check = register.isTeacher.checked
                     const data = {
-                        password: {
-                            value: loginForm.password.value,
-                            name: "password",
-                            id: "password-error",
+                        firstName: {
+                            value: register.firstName.value,
+                            name: 'First name'
+                        },
+                        lastName: {
+                            value: register.lastName.value,
+                            name: 'Last name'
                         },
                         email: {
-                            value: loginForm.email.value.trim(),
-                            name: "email",
-                            id: "email-error",
+                            value: register.email.value,
+                            name: 'Email'
                         },
-                    };
-                    controller.Validate(data);
-                });
-                const redirectToLogin = document.getElementById("redirect-to-register");
-                redirectToLogin.addEventListener("click", () => {
-                    view.setActiveScreen("registerScreen");
-                });
+                        password: {
+                            value: register.password.value,
+                            name: 'Password'
+                        },
+                        confirmPassword: {
+                            value: register.confirmPassword.value,
+                            name: 'Confirm password'
+                        },
+                        isTeacher: {
+                            value: `${check}`,
+                            name: "checking to Teacher or Student",
+                        },
+                    }
+                    controller.checkNull(data)
+                    controller.logup(data)
+                })
+                let isTeacher = document.getElementById('isTeacher-input')
+                let isStudent = document.getElementById('isStudent-input')
+                isTeacher.addEventListener('change', (e) => {
+                    isTeacher.checked == true ? isStudent.disabled = true : isStudent.disabled = false
+                })
+                isStudent.addEventListener('change', (e) => {
+                    isStudent.checked == true ? isTeacher.disabled = true : isTeacher.disabled = false
+                })
+                gotoLogin.addEventListener('click', () => {
+                    view.setActiveScreen('loginScreen')
+                })
+                break;
+            }
+        case 'loginScreen':
+            {
+                let screen = document.getElementById('app')
+                screen.innerHTML = components.loginScreen
+                let login = document.getElementById('login-form')
+                let gotoLogup = document.getElementById('go-to-logup')
+                login.addEventListener('submit', (x) => {
+                    x.preventDefault()
+                    login.email.value = login.email.value.trim();
+                    const data = {
+                        email: {
+                            value: login.email.value,
+                            name: 'Email'
+                        },
+                        password: {
+                            value: login.password.value,
+                            name: 'Password'
+                        }
+                    }
+                    controller.checkNull(data)
+                    controller.login(data)
+                })
+                gotoLogup.addEventListener('click', () => {
+                    view.setActiveScreen('registerScreen')
+                })
                 break;
             }
         case 'selectRoomScreen':

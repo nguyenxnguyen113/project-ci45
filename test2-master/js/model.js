@@ -5,15 +5,45 @@ model.collectionName = 'rooms'
 model.rooms = undefined
 model.currentUser = undefined
 model.room = undefined
-model.login = async(email, password) => {
-    try {
-        const response = await firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password);
-    } catch (err) {
-        view.errorMessage("password-error", err.message);
-    }
-};
+model.register = (data) => {
+    firebase.auth().createUserWithEmailAndPassword(data.email.value, data.password.value)
+        .then((res) => {
+            firebase.auth().currentUser.updateProfile({
+                displayName: data.lastName.value + data.firstName.value,
+                photoURL: "https://firebasestorage.googleapis.com/v0/b/chat-app-bc2a8.appspot.com/o/user.png?alt=media&token=28e24cc2-86bd-43f8-aa54-2a62ef76650a"
+            }).then(() => {
+                let check = false
+                data.isTeacher.value == 'true' ? check = true : check = false
+                model.addFireStore("users", {
+                    name: res.user.displayName,
+                    email: res.user.email,
+                    isTeacher: check,
+                    password: data.password.value
+                });
+            })
+            firebase.auth().currentUser.sendEmailVerification()
+            alert("Congratulation! you have successfully registed\n please check your email to verify your account. ")
+            view.setActiveScreen("login", data)
+        })
+        .catch(function(error) {
+            console.log(error);
+            controller.authenticate(error)
+        });
+}
+model.login = (data) => {
+    firebase.auth().signInWithEmailAndPassword(data.email.value, data.password.value)
+        .then((res) => {
+            if (!res.user.emailVerified) {
+
+                alert('please verify your email')
+            }
+
+        })
+        .catch(function(error) {
+            console.log(error);
+            controller.authenticate(error)
+        });
+}
 model.initFirebaseStore = () => {
     return firebase.firestore()
 }

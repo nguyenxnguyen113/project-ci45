@@ -1,30 +1,95 @@
 const components = {}
+components.registerScreen = `
+<div class="log-container">
+    <div class="symbol absolute">Online Class</div>
+    <div class="introduce-text">
+        <p>
+            Everyone is welcome.
+        </p>
+        <p>
+            Online class Where helps you save time and  always opens for free
+        </p>
+    </div>
+    <div class="main-log-container">
+        <div class="img-left">
+            <img src="../image/Healthy-Positive-Classroom.jpg" alt="">
+        </div>
+        <div class="form-log-up">
+            <form id="register-form" action="">
+                <div class="input-wrap">
+                    <input placeholder="First Name" type="text" name="firstName">
+                    <div class="error" id="firstName"></div>
+                </div>
+                <div class="input-wrap">
+                    <input placeholder="Last Name" type="text" name="lastName">
+                    <div class="error" id="lastName"></div>
+                </div>
+                <div class="input-wrap">
+                    <input placeholder="Email" type="email" name="email">
+                    <div class="error" id="email"></div>
+                </div>
+                <div class="input-wrap">
+                    <input placeholder="Password" type="password" name="password">
+                    <div class="error" id="password"></div>
+                </div>
+                <div class="input-wrap">
+                    <input placeholder="Confirm Password" type="password" name="confirmPassword">
+                    <div class="error" id="confirmPassword"></div>
+                </div>
+                <div class="check-is-teacher-box">
+                    <div class="input-wrap">
+                        <div class="check-box">
+                            <input type="checkbox" id="isTeacher-input" name='isTeacher'>
+                            <label for="isTeacher-input">Teacher</label>
+                        </div>
+                        <div class="check-box">
+                            <input type="checkbox" id="isStudent-input" name='isStudent'>
+                            <label for="isStudent-input">Student</label>
+                        </div>
+                    </div>
+                    <div class="error" id="isTeacher"></div>
+                </div>
+                <div class="row">
+                    <span>Do you already have an account? <div id="go-to-login">Login</div> </span>
+                    <button class="bnt" type="submit">Logup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+`
 components.loginScreen = `
-<div class="login-container">
-<div class="aside-right">
-  <div class="header">
-    <h3>MindX Chat</h3>
-  </div>
-  <form id="login-form">
-    <div class="input-name-wrapper">
-      <div class="input-wrapper">
-        <input type="email" name="email" placeholder="Email" />
-        <div class="error" id="email-error"></div>
-      </div>
-      <div class="input-wrapper">
-        <input type="password" name="password" placeholder="password" />
-        <div class="error" id="password-error"></div>
-      </div>
+<div class="log-container">
+    <div class="symbol absolute">Online Class</div>
+    <div class="introduce-text">
+        <p>
+            Everyone is welcome.
+        </p>
+        <p>
+            Online class Where helps you save time and  always opens for free
+        </p>
     </div>
-    <div class="form-action">
-      <span id="redirect-to-register">
-        Don't have an account? Register
-      </span>
-      <button class="btn" type="submit">
-        login
-      </button>
+    <div class="main-log-container">
+        <div class="img-left">
+            <img src="../img/Healthy-Positive-Classroom.jpg" alt="">
+        </div>
+        <div class="form-log-up">
+            <form id="login-form" action="">
+                <div class="input-wrap">
+                    <input placeholder="Email" type="text" name="email">
+                    <div class="error" id="email"></div>
+                </div>
+                <div class="input-wrap">
+                    <input placeholder="Password" type="password" name="password">
+                    <div class="error" id="password"></div>
+                </div>
+                <div class="row">
+                    <span>You don't have an account? <div id="go-to-logup">Logup</div> </span>
+                    <button class="bnt" type="submit">Logup</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </form>
 </div>`
 
 components.selectRoomScreen = `
