@@ -75,6 +75,7 @@ view.setActiveScreen = async(screen, id) => {
                         view.getRooms(filteredCharacters[index])
                     }
                 });
+
                 break;
 
             }

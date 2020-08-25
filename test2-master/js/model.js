@@ -23,7 +23,7 @@ model.getRoomInfo = async(id) => {
 }
 model.getUserIntoRoom = async(idstream, currentRoomID) => {
     let data = await firebase.database().ref(`${currentRoomID}/` + idstream).once('value')
-    return data.val()
+    console.log(data.val())
 }
 model.createRoom = async(room) => {
     await firebase.firestore().collection(model.collectionName).add(room)
