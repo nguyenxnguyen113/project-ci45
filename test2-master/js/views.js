@@ -254,8 +254,8 @@ view.setActiveScreen = async(screen, id) => {
 view.errorMessage = (id, message) => {
     document.getElementById(id).innerText = message;
 };
-view.showRooms = () => {
-    for (oneRoom of model.rooms) {
+view.showRooms = (r) => {
+    for (oneRoom of r) {
         view.addNewRoom(oneRoom)
     }
 }
@@ -324,23 +324,25 @@ view.getRooms = (data) => {
         view.getInFoRoom(r)
     })
 }
-view.getYourRooms = (data) => {
-    let listRooms = document.querySelector('.room-list')
-    let html = `
-<div class="room-bar" id="${data.id}">
-    <div class="room-id">ID: ${data.id}</div>
-    <div class="room-host">Host: ${data.host}</div>
-    <div class="room-title">Name: ${data.name}</div>
-    <div class="room-createAt">Created At: ${data.createdAt}</div>
-</div>
-    `
-    listRooms.insertAdjacentHTML('beforeend', html)
-    let joinRoom = document.getElementById(data.id)
+view.getYourRooms = (room) => {
+    const roomWrapper = document.createElement('div')
+    roomWrapper.className = 'room-bar'
+    roomWrapper.id = room.id
+    roomWrapper.innerHTML = `
+    <div class="room-id">ID: ${room.id}</div>
+    <div class="room-host">Host: ${room.host}</div>
+    
+    <div class="room-title">Name: ${room.name}</div>
+    <div class="room-createAt">Created At: ${room.createdAt}</div>
+`
+    document.querySelector(".right-container .room-list").appendChild(roomWrapper)
+
+    let joinRoom = document.getElementById(roomWrapper.id)
     joinRoom.addEventListener('click', async() => {
-        var person = prompt("Please enter your name", "Harry Potter");
-        if (person === data.password) {
-            model.currentRoomID = data.id
-            view.setActiveScreen('classRoomScreen', data.id)
+        var person = prompt("Please enter password");
+        if (person === room.password) {
+            model.currentRoomID = room.id
+            view.setActiveScreen('classRoomScreen', room.id)
         } else {
             alert('Join failed')
         }

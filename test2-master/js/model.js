@@ -5,6 +5,7 @@ model.collectionName = 'rooms'
 model.rooms = undefined
 model.currentUser = undefined
 model.room = undefined
+model.yourRoom = undefined
 model.register = (data) => {
     firebase.auth().createUserWithEmailAndPassword(data.email.value, data.password.value)
         .then((res) => {
@@ -62,7 +63,7 @@ model.loadRooms = async() => {
     const response = await firebase.firestore().collection(model.collectionName).get()
     model.rooms = getDataFromDocs(response.docs)
 
-    view.showRooms()
+    view.showRooms(model.rooms)
 }
 
 model.listenRoomChange = () => {
@@ -154,8 +155,9 @@ model.getInfoUser = async(email) => {
 }
 
 model.getTest = async(user) => {
-    let data = await firebase.firestore().collection('rooms').where("host", "==", user).get()
-    return getDataFromDocs(data.docs)
+    const yourRooms = await firebase.firestore().collection('rooms').where("host", "==", user).get()
+    model.yourRoom = getDataFromDocs(yourRooms.docs)
+    view.showRooms(model.yourRoom)
 }
 
 model.updateDataToFireStore = async(collection, data) => {;
