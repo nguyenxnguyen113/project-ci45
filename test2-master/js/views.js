@@ -418,7 +418,7 @@ view.listenChangeToEditProfile = () => {
         editPasswordBnt.classList = ''
         viewRoomOfUser.classList = 'active-bnt'
         profileBox.innerHTML = components.viewYourRoom
-        let yourRoom = await model.getRoomOfUser()
+        let yourRoom = await model.getTest()
         view.getYourRooms(yourRoom)
         console.log(model.currentUser.email)
     })
