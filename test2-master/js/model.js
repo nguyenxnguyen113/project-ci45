@@ -63,7 +63,7 @@ model.loadRooms = async() => {
     const response = await firebase.firestore().collection(model.collectionName).get()
     model.rooms = getDataFromDocs(response.docs)
 
-    view.showRooms(model.rooms)
+    view.showRooms(model.rooms, view.addNewRoom)
 }
 
 model.listenRoomChange = () => {
@@ -157,7 +157,7 @@ model.getInfoUser = async(email) => {
 model.getTest = async(user) => {
     const yourRooms = await firebase.firestore().collection('rooms').where("host", "==", user).get()
     model.yourRoom = getDataFromDocs(yourRooms.docs)
-    view.showRooms(model.yourRoom)
+    view.showRooms(model.yourRoom, view.getYourRooms)
 }
 
 model.updateDataToFireStore = async(collection, data) => {;

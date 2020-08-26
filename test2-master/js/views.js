@@ -235,6 +235,7 @@ view.setActiveScreen = async(screen, id) => {
                     model.loadRooms()
                 })
                 console.log(homPage)
+
                 break;
             }
         case 'viewYourFriendProfile':
@@ -254,9 +255,9 @@ view.setActiveScreen = async(screen, id) => {
 view.errorMessage = (id, message) => {
     document.getElementById(id).innerText = message;
 };
-view.showRooms = (r) => {
+view.showRooms = (r, f) => {
     for (oneRoom of r) {
-        view.addNewRoom(oneRoom)
+        f(oneRoom)
     }
 }
 
@@ -421,8 +422,6 @@ view.listenChangeToEditProfile = () => {
         viewRoomOfUser.classList = 'active-bnt'
         profileBox.innerHTML = components.viewYourRoom
         let yourRoom = await model.getTest(model.currentUser.email)
-        console.log(yourRoom)
-        view.getYourRooms(yourRoom)
     })
     profileBnt.addEventListener('click', () => {
         profileBnt.classList = 'active-bnt'
