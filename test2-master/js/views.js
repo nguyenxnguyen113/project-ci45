@@ -386,11 +386,12 @@ view.listenChangeToEditProfile = () => {
     let profileBnt = document.getElementById('profile-bnt')
     let editProfileBnt = document.getElementById('edit-profile-bnt')
     let editPasswordBnt = document.getElementById('edit-password-bnt')
-    let viewRoomOfUser = document.getElementById('')
+    let viewRoomOfUser = document.getElementById('view-room-of-current-user')
     profileBnt.addEventListener('click', () => {
         profileBnt.classList = 'active-bnt'
         editProfileBnt.classList = ''
         editPasswordBnt.classList = ''
+        viewRoomOfUser.classList = ''
         profileBox.innerHTML = components.profileBox
         let title = document.querySelector('.menu-div .title')
         title.innerHTML = 'Profile'
@@ -400,7 +401,7 @@ view.listenChangeToEditProfile = () => {
         profileBnt.classList = ''
         editProfileBnt.classList = 'active-bnt'
         editPasswordBnt.classList = ''
-
+        viewRoomOfUser.classList = ''
         profileBox.innerHTML = components.editProfileBox
         let emailProfile = document.querySelector('.email-profile')
         emailProfile.innerHTML = `${firebase.auth().currentUser.email}`
@@ -421,6 +422,7 @@ view.listenChangeToEditProfile = () => {
         profileBnt.classList = ''
         editProfileBnt.classList = ''
         editPasswordBnt.classList = 'active-bnt'
+        viewRoomOfUser.classList = ''
         profileBox.innerHTML = components.editPasswordBox
         let title = document.querySelector('.menu-div .title')
         title.innerHTML = 'Edit Password'
