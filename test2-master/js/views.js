@@ -231,7 +231,8 @@ view.setActiveScreen = async(screen, id) => {
                 view.listenOnUpdateImage()
                 const homPage = document.querySelector('.symbol')
                 homPage.addEventListener('click', () => {
-                    view.setActiveScreen('select')
+                    view.setActiveScreen('selectRoomScreen')
+                    model.loadRooms()
                 })
                 console.log(homPage)
                 break;
@@ -239,6 +240,12 @@ view.setActiveScreen = async(screen, id) => {
         case 'viewYourFriendProfile':
             {
                 document.getElementById("app").innerHTML = components.viewYourFriendProfile;
+                view.setNavbarInfoUser()
+                const homPage = document.querySelector('.symbol')
+                homPage.addEventListener('click', () => {
+                    view.setActiveScreen('selectRoomScreen')
+                    model.loadRooms()
+                })
             }
     }
 }
@@ -379,7 +386,7 @@ view.listenChangeToEditProfile = () => {
     let profileBnt = document.getElementById('profile-bnt')
     let editProfileBnt = document.getElementById('edit-profile-bnt')
     let editPasswordBnt = document.getElementById('edit-password-bnt')
-
+    let viewRoomOfUser = document.getElementById('')
     profileBnt.addEventListener('click', () => {
         profileBnt.classList = 'active-bnt'
         editProfileBnt.classList = ''
@@ -494,7 +501,7 @@ view.getUser = (user) => {
     <div class="profile-row pd-t-2">
     <div class="info-profile">
         <div id="profile-name">Name: ${user.name}</div>
-        <div id="profile-email">Email ${user.email}</div>
+        <div id="profile-email">Email: ${user.email}</div>
     </div>
     <div class="info-profile">
         <div id="is-teacher"></div>
@@ -509,13 +516,11 @@ view.getUser = (user) => {
     </div>`
     infoUser.innerHTML = html
 
-    // document.getElementById('profile-name').innerHTML = `Name: ${user.name}`
-    // document.getElementById('profile-email').innerHTML = `Email: ${user.email}`
-    // let isTeacher = document.getElementById('is-teacher');
-    // let workAt = document.getElementById('work-at')
-    // let aboutMe = document.getElementById('about-me')
-    // let data = await model.getDataFireStore('users');
-    // data.isTeacher ? isTeacher.innerHTML = "Job: Teacher" : isTeacher.innerHTML = "Job: Student"
-    // data.workAt == undefined ? workAt.innerHTML = `` : workAt.innerHTML = `Working at:  ${data.workAt}`
-    // data.aboutMe == undefined ? aboutMe.innerHTML = `` : aboutMe.innerHTML = data.aboutMe
+
+    let job = document.getElementById('is-teacher');
+    if (user.isTeacher == true) {
+        job.innerText = "Job: Teacher"
+    } else {
+        job.innerText = "Job: Student"
+    }
 }
