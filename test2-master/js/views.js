@@ -324,11 +324,35 @@ view.getRooms = (data) => {
         view.getInFoRoom(r)
     })
 }
+view.getYourRooms = (data) => {
+    let listRooms = document.querySelector('.room-list')
+    let html = `
+<div class="room-bar" id="${data.id}">
+    <div class="room-id">ID: ${data.id}</div>
+    <div class="room-host">Host: ${data.host}</div>
+    <div class="room-title">Name: ${data.name}</div>
+    <div class="room-createAt">Created At: ${data.createdAt}</div>
+</div>
+    `
+    listRooms.insertAdjacentHTML('beforeend', html)
+    let joinRoom = document.getElementById(data.id)
+    joinRoom.addEventListener('click', async() => {
+        var person = prompt("Please enter your name", "Harry Potter");
+        if (person === data.password) {
+            model.currentRoomID = data.id
+            view.setActiveScreen('classRoomScreen', data.id)
+        } else {
+            alert('Join failed')
+        }
+    })
+}
+
 view.updateNumberUser = (docId, numberUser) => {
     const conversation = document.getElementById(docId)
     const secondChild = conversation.getElementsByTagName('div')[1]
     secondChild.innerText = numberUser + ' members'
 }
+
 view.getInFoRoom = (room) => {
     let infoRoom = document.querySelector('.left-container')
     let html = `
@@ -381,12 +405,23 @@ view.setUpProfilePage = () => {
     view.setProfileDefault()
     view.listenChangeToEditProfile()
 }
+
 view.listenChangeToEditProfile = () => {
     let profileBox = document.querySelector('.profile-box')
     let profileBnt = document.getElementById('profile-bnt')
     let editProfileBnt = document.getElementById('edit-profile-bnt')
     let editPasswordBnt = document.getElementById('edit-password-bnt')
     let viewRoomOfUser = document.getElementById('view-room-of-current-user')
+    viewRoomOfUser.addEventListener('click', async() => {
+        profileBnt.classList = ''
+        editProfileBnt.classList = ''
+        editPasswordBnt.classList = ''
+        viewRoomOfUser.classList = 'active-bnt'
+        profileBox.innerHTML = components.viewYourRoom
+        let yourRoom = await model.getRoomOfUser()
+        view.getYourRooms(yourRoom)
+        console.log(model.currentUser.email)
+    })
     profileBnt.addEventListener('click', () => {
         profileBnt.classList = 'active-bnt'
         editProfileBnt.classList = ''
