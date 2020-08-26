@@ -418,9 +418,9 @@ view.listenChangeToEditProfile = () => {
         editPasswordBnt.classList = ''
         viewRoomOfUser.classList = 'active-bnt'
         profileBox.innerHTML = components.viewYourRoom
-        let yourRoom = await model.getTest()
+        let yourRoom = await model.getTest(model.currentUser.email)
+        console.log(yourRoom)
         view.getYourRooms(yourRoom)
-        console.log(model.currentUser.email)
     })
     profileBnt.addEventListener('click', () => {
         profileBnt.classList = 'active-bnt'

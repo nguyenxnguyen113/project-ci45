@@ -361,13 +361,7 @@ components.viewYourRoom = `
 <div class="right-container">
     <button class="new-room-bnt">Create New Room</button>
     <div class="room-list">
-        <div class="room-bar">
-            <div class="room-id"></div>
-            <div class="room-host"></div>
 
-            <div class="room-title"></div>
-            <div class="room-createAt"></div>
-        </div>
     </div>
 </div>
 </div>

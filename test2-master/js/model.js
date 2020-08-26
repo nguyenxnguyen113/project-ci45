@@ -153,22 +153,13 @@ model.getInfoUser = async(email) => {
     return data.docs[0].data()
 }
 
-model.getTest = async() => {
-    let db = firebase.firestore()
-    let data = await db.collection('conversations').where("host", "==", model.currentUser.email).get()
-    console.log(getDataFromDocs(data.docs))
+model.getTest = async(user) => {
+    let data = await firebase.firestore().collection('rooms').where("host", "==", user).get()
+    return getDataFromDocs(data.docs)
 }
 
 model.updateDataToFireStore = async(collection, data) => {;
     let db = firebase.firestore()
     let doc = await db.collection(`${collection}`).where("email", "==", firebase.auth().currentUser.email).get()
     db.collection(`${collection}`).doc(`${doc.docs[0].id}`).update(data)
-}
-getDataFromDoc = (doc) => {
-    const data = doc.data()
-    data.id = doc.id
-    return data
-}
-getDataFromDocs = (docs) => {
-    return docs.map(item => getDataFromDoc(item))
 }
